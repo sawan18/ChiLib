@@ -10,9 +10,13 @@ ChiLib is a powerful Command-Line Interface (CLI) tool designed to help users fi
 ✨ Key Features
 
 🔍 Search libraries by ZIP code
+
 📋 View detailed library information
+
 🕒 Track search history
+
 🚨 Robust error handling
+
 🌈 Rich, colorful terminal interface
 
 ---
