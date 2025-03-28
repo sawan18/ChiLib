@@ -4,83 +4,96 @@
 
 📝 Project Overview
 
-ChiLib is a powerful Command-Line Interface (CLI) tool designed to help users find Chicago Public Library branches quickly and efficiently. The application retrieves library information from the official City of Chicago open data repository and provides an intuitive search experience based on ZIP codes.
+ChiLib is a powerful Command-Line Interface (CLI) tool designed to help users find Chicago Public Library branches quickly and efficiently.
+
+The application retrieves library information from the official City of Chicago open data repository and provides an intuitive search experience based on ZIP codes.
 
 ---
 
 ✨ Key Features
 
-🔍 Search libraries by ZIP code
+    🔍 Search libraries by ZIP code
 
-📋 View detailed library information
+    📋 View detailed library information
 
-🕒 Track search history
+    🕒 Track search history
 
-🚨 Robust error handling
+    🚨 Robust error handling
 
-🌈 Rich, colorful terminal interface
+    🌈 Rich, colorful terminal interface
 
 ---
 
 🛠️ Prerequisites
 
-Python 3.8+
+    Python 3.8+
 
-pip (Python package manager)
+    pip (Python package manager)
 
 ---
 
 🚀 Installation
 
-Clone the repository:
+    Clone the repository:
 
-git clone https://github.com/sawan18/chilib.git
+        git clone https://github.com/sawan18/chilib.git
 
-cd chilib
+        cd chilib
 
-Create a virtual environment (recommended):
 
-bash:-
+    Create a virtual environment (recommended):
 
-python3 -m venv venv
+        bash:-
 
-source venv/bin/activate
+        python3 -m venv venv
 
-On Windows, use 'venv\Scripts\activate'
+        source venv/bin/activate
 
-Install required dependencies:
+        On Windows, use 'venv\Scripts\activate'
 
-bash:-
+    Install required dependencies:
 
-pip install -r requirements.txt
+        bash:-
 
-pip install requests termcolor pyfiglet rich
+        pip install -r requirements.txt
+
+        pip install requests termcolor pyfiglet rich
 
 ---
 
 📦 Dependencies
 
-requests
-termcolor
-pyfiglet
-rich
-typing
+    requests
+
+    termcolor
+
+    pyfiglet
+
+    rich
+
+    typing
 
 ---
 
 🖥️ Usage
-Run the application:
-bashCopypython library_finder.py
+
+    Run the application:
+
+    python library_finder.py
 
 ---
 
 Available Commands
 
-Enter a 5-digit ZIP code to find libraries
-help: Display command menu
-history: View recent searches
-full: View detailed search history
-exit or quit: Close the application
+    Enter a 5-digit ZIP code to find libraries
+
+    help: Display command menu
+
+    history: View recent searches
+
+    full: View detailed search history
+
+    exit or quit: Close the application
 
 ---
 
@@ -94,47 +107,49 @@ Copy📮 Enter ZIP code (or 'help'): 60601
 
 🔧 Configuration
 
-The default data source is the City of Chicago's open data API
-Maximum search history is set to 100 entries
-Logging is configured to library_finder.log
+    The default data source is the City of Chicago's open data API
+
+    Maximum search history is set to 100 entries
+
+    Logging is configured to library_finder.log
 
 ---
 
 🐛 Error Handling
 
-Invalid ZIP codes are gracefully handled
-Network errors are logged and reported
-Comprehensive exception management
+    Invalid ZIP codes are gracefully handled
+    Network errors are logged and reported
+    Comprehensive exception management
 
 ---
 
 📄 Logging
 
-Application logs are stored in library_finder.log, capturing:
+    Application logs are stored in library_finder.log, capturing:
 
-Successful data loads
+    Successful data loads
 
-Error events
+    Error events
 
-Timestamp and log levels
+    Timestamp and log levels
 
 ---
 
 🤝 Contributing
 
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
+    Fork the repository
+    Create your feature branch (git checkout -b feature/AmazingFeature)
+    Commit your changes (git commit -m 'Add some AmazingFeature')
+    Push to the branch (git push origin feature/AmazingFeature)
+    Open a Pull Request
 
 ---
 
 🙌 Acknowledgments
 
-City of Chicago Open Data Portal
-Python Community
-Open-source libraries used in this project
+    City of Chicago Open Data Portal
+    Python Community
+    Open-source libraries used in this project
 
 ---
 
