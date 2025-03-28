@@ -24,6 +24,7 @@ ChiLib is a powerful Command-Line Interface (CLI) tool designed to help users fi
 🛠️ Prerequisites
 
 Python 3.8+
+
 pip (Python package manager)
 
 ---
@@ -32,17 +33,26 @@ pip (Python package manager)
 
 Clone the repository:
 
-bashCopygit clone https://github.com/yourusername/chilib.git
+git clone https://github.com/sawan18/chilib.git
+
 cd chilib
 
 Create a virtual environment (recommended):
 
-bashCopypython3 -m venv venv
-source venv/bin/activate # On Windows, use `venv\Scripts\activate`
+bash:-
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+# On Windows, use `venv\Scripts\activate`
 
 Install required dependencies:
 
-bashCopypip install -r requirements.txt
+bash:-
+pip install -r requirements.txt
+
+pip install requests termcolor pyfiglet rich
 
 ---
 
@@ -97,10 +107,13 @@ Comprehensive exception management
 ---
 
 📄 Logging
+
 Application logs are stored in library_finder.log, capturing:
 
 Successful data loads
+
 Error events
+
 Timestamp and log levels
 
 ---
