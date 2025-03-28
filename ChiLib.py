@@ -54,15 +54,17 @@ from rich.progress import Progress
 '''
     The main function of the program is to load the libraries from the official City of Chicago open data repository
     and then format the library information in a user-friendly way.
+
     The user can then search for libraries based on zip code and view the search history.
+    I can do that through retrieving library data from the city of Chicago's open data api.
 
 
-Retrieves library data from the City of Chicago's open data API.
+   
     
     My Approach:
     - I want to program with a defensive programming with comprehensive exception handling
-    - should be able to uses StringIO for efficenty using in-memory CSV processing  
-    - this should be able to transform raw CSV data into a readily list of dictionaries
+    - I should be able to uses StringIO for efficenty using in-memory CSV processing  
+    - aslo this should be able to transform raw CSV data into a readily list of dictionaries
     
         expected returns statement:
         list: structured library data or "None" if retrieval fails
@@ -117,11 +119,6 @@ class DataLoadError(LibraryError): pass
     --------
     List[Dict[str, Any]]: here I will need to type-annotated dataset preserving source schema
 
-    metrics:
-    --------
-    - Success Rate: logger.info() counters
-    - Error Budget: logger.error() diagnostics
-    - Latency: Hidden in progress callbacks
     """
 
 def load_libraries() -> List[Dict[str, Any]]:
@@ -138,20 +135,20 @@ def load_libraries() -> List[Dict[str, Any]]:
 
 
 '''
-    transforms raw library data into a human-readable, professionally formatted string.
+    transforms raw library data into a readable, formatted string.
     
     have to use advanced formatting strategy:
-    - Dynamically handles optional index for list presentations
-    - Gracefully manages potential missing data fields
-    - Implements defensive programming by using .get() with fallback values
+    1. should be able to dynamically handles optional index for list presentations
+    2. shold be able to  manages potential missing data fields
+    3. Lastly I can implement defensive programming by using .get() with fallback values
     
     parameters:
-        library (dict): Raw library metadata
-        index (int, optional): Enumeration index for multiple results
+        library (dict): is baciacally raw library metadata
+        index (int, optional): moves forward with the index for multiple results
     
     returns:
-        str: elegantly formatted library information
-    '''
+        str: should be able to return or output a really nicely formatted library information
+'''
 
 def format_library(library: Dict[str, str], index: int = None) -> str:
     """Format library information with consistent styling"""
@@ -160,14 +157,15 @@ def format_library(library: Dict[str, str], index: int = None) -> str:
             else f"[bold cyan]🏛️  {branch_name}[/]"
     
     return f"""
-[bold blue]┏{'━'*58}┓[/]
-{header}
-[dim]┃[/] [green]• Hours:[/]    {library.get('SERVICE HOURS', 'Not available')}
-[dim]┃[/] [green]• Address:[/]  {library['ADDRESS']}
-[dim]┃[/]             {library['CITY']}, {library['STATE']} {library['ZIP']}
-[dim]┃[/] [green]• Website:[/]  [link={library['WEBSITE']}]{library['WEBSITE']}[/link]
-[dim]┃[/] [green]• Phone:[/]    {library.get('PHONE', 'N/A').strip()}
-[bold blue]┗{'━'*58}┛[/]
+
+    [bold blue]┏{'━'*58}┓[/]
+    {header}
+    [dim]┃[/] [green]• Hours:[/]    {library.get('SERVICE HOURS', 'Not available')}
+    [dim]┃[/] [green]• Address:[/]  {library['ADDRESS']}
+    [dim]┃[/]             {library['CITY']}, {library['STATE']} {library['ZIP']}
+    [dim]┃[/] [green]• Website:[/]  [link={library['WEBSITE']}]{library['WEBSITE']}[/link]
+    [dim]┃[/] [green]• Phone:[/]    {library.get('PHONE', 'N/A').strip()}
+    [bold blue]┗{'━'*58}┛[/]
 """
 
 
@@ -175,11 +173,12 @@ def format_library(library: Dict[str, str], index: int = None) -> str:
     should be able to render user's search history with temporal sorting.
     
     optimizing performance:
-    1. implements reverse chronological sorting for most recent results first
-    2. minimizes computational complexity with built-in sorted() function
+    1. in this fucntion the major role is to implement a reverse chronological sorting 
+       for most recent results first
+    2. then after that, minimizes computational complexity with built-in sorted() function
     
     parameters:
-        history (list): Chronological search record
+        history (list): should output a chronological search record
     '''
 
 def display_history(history: List[Dict]) -> None:
@@ -208,19 +207,22 @@ def display_history_table(history: List[Dict]) -> None:
 
 
 '''
-    this main() function should be able to manage the primary user interaction workflow 
-    for searching libraries by ZIP code.
+    this main() function where I can make all the function to get like called and use them in the 
+    way the project description is. Here I should be able to manage the primary user interaction 
+    workflow for searching libraries by ZIP code.
 
     design concept:
-    1. provides an interactive CLI experience with clear user guidance.
-    2. supports continuous searching while allowing users to exit easily.
+    1. provides an interactive CLI experience with clear user guidance.(this can be done 
+       through with an addtion of UI library for the terminal which can make it look interactive)
+    2. supports continuous searching while allowing users to exit easily. (here I can use the break as well to end the CLI tool)
     3. shoud be able to maintains a lightweight search for optimization of 
-       performance using less memory history with configurable limits.
+       performance using less memory history with configurable limits. (this is also why I used a limit for the history as well)
+       (this should work like a token mostly, I hope it can do that as I am not going to search like 100 times)
     4. provides an input validation and real-time feedback(eg. help, correction 
-       of this zip code if wrong).
+       of this zip code if wrong). (this should be the easiest of them all to code interms of code complexity as well)
 
     workflow:
-    step 1: load library dataset into memory.
+    step 1: load library dataset into memory. 
     step 2: start the session for user queries.
     step 3: process and validate ZIP code inputs.
     step 4: retrieve matching libraries and display results.
@@ -232,7 +234,6 @@ def display_history_table(history: List[Dict]) -> None:
 
 
 def main() -> None:
-    """Main execution flow with professional UX"""
     # Show polished welcome screen
     welcome_text = pyfiglet.figlet_format("ChiLib", font="slant")
     console.print(f"[cyan]{welcome_text}[/]")
@@ -266,7 +267,8 @@ def main() -> None:
                 console.print("  [cyan]full[/cyan]    - Detailed search history")
                 console.print("  [cyan]exit[/cyan]    - Quit application\n")
                 continue
-
+            
+            # this is where I can check if the user wants to see the history of the search
             if user_input.startswith(('history', 'full')):
                 if not history:
                     console.print("[yellow]⚠️  No search history available[/yellow]")
@@ -278,15 +280,18 @@ def main() -> None:
                     display_history(history)
                 continue
 
-            # this is to check input and validate it 
+            # here using like an if statement I can check  the user's input and validate it
+            # and make sure the numbers he inputed are right 
+            # if not then tell them it is wrong and give out the right format for them to understand what the correct format is 
             if not Config.ZIP_REGEX.match(user_input):
                 console.print(f"[red]❌ Invalid ZIP code format. Must be 5 digits (e.g. 60606)[/red]")
                 continue
 
             # here I am supposed to execute library search 
+            # this should be a simple search function which will search the library based on the user input Zip code
             with console.status(f"[bold green]🔍 Searching {user_input}...[/bold green]"):
                 matching = [lib for lib in libraries if lib['ZIP'] == user_input]
-                time.sleep(0.3)  # Simulated search delay
+                time.sleep(0.3)  # simulated search delay
 
             if not matching:
                 console.print(f"[bold yellow]⚠️  No libraries found in ZIP {user_input}[/bold yellow]")
@@ -297,7 +302,7 @@ def main() -> None:
                     console.print(format_library(lib, idx))
                     history.append({'time': search_time, 'library': lib})
                 
-                # this should be able to maintain history limits
+                # this should be able to maintain history limits for time complexity reasons 
                 history = history[-Config.HISTORY_LIMIT:]
 
         except KeyboardInterrupt:
