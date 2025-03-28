@@ -39,14 +39,12 @@ import logging
 from datetime import datetime
 from typing import List, Dict, Any
 from io import StringIO
+from csv import DictReader
 
 # these are import statements which allow me to present my terminal output 
 # in a professional and easy to read format
-from termcolor import colored
 import pyfiglet
 import requests
-from csv import DictReader
-from io import StringIO
 from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress
@@ -93,7 +91,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# lastly we will have to error handle 
+# lastly here I will have to error handle
+# here I would have to create error handle techniques using three classes 
+# I will use LibraryError for exception 
+# I will use InvalidZipError for invalid zip code
+# I will use DataLoadError for data loading error
 class LibraryError(Exception): pass
 class InvalidZipError(LibraryError): pass
 class DataLoadError(LibraryError): pass
@@ -152,19 +154,20 @@ def load_libraries() -> List[Dict[str, Any]]:
     '''
 
 def format_library(library: Dict[str, str], index: int = None) -> str:
-    """Professional formatted output with rich formatting"""
-    header = colored(f"🏛️  Library #{index}: ", "yellow") + colored(library['BRANCH'], "cyan") if index \
-            else colored(f"🏛️  {library['BRANCH']}", "cyan")
+    """Format library information with consistent styling"""
+    branch_name = library['BRANCH']
+    header = f"[bold yellow]🏛️  Library #{index}:[/] [cyan]{branch_name}[/]" if index \
+            else f"[bold cyan]🏛️  {branch_name}[/]"
     
     return f"""
-{colored('═'*60, 'blue')}
+[bold blue]┏{'━'*58}┓[/]
 {header}
-{colored('🕒 Hours: ', 'green')}{library.get('SERVICE HOURS', 'Not available')}
-{colored('📍 Address: ', 'green')}{library['ADDRESS']}
-{library['CITY']}, {library['STATE']} {library['ZIP']}
-{colored('🌐 Website: ', 'green')}{library['WEBSITE']}
-{colored('📞 Phone: ', 'green')}{library.get('PHONE', 'N/A').strip()}
-{colored('═'*60, 'blue')}
+[dim]┃[/] [green]• Hours:[/]    {library.get('SERVICE HOURS', 'Not available')}
+[dim]┃[/] [green]• Address:[/]  {library['ADDRESS']}
+[dim]┃[/]             {library['CITY']}, {library['STATE']} {library['ZIP']}
+[dim]┃[/] [green]• Website:[/]  [link={library['WEBSITE']}]{library['WEBSITE']}[/link]
+[dim]┃[/] [green]• Phone:[/]    {library.get('PHONE', 'N/A').strip()}
+[bold blue]┗{'━'*58}┛[/]
 """
 
 
@@ -186,6 +189,8 @@ def display_history(history: List[Dict]) -> None:
     for entry in sorted_entries:
         console.print(format_library(entry['library']))
 
+# here this will typically be caleed when the user types in like "full history"
+# that is wher this function should output the entire history of the user search using timp stamps
 def display_history_table(history: List[Dict]) -> None:
     """Professional table display for detailed history"""
     table = Table(title="Search History", show_header=True, header_style="bold magenta")
@@ -229,8 +234,9 @@ def display_history_table(history: List[Dict]) -> None:
 def main() -> None:
     """Main execution flow with professional UX"""
     # Show polished welcome screen
-    console.print(colored(pyfiglet.figlet_format("ChiLib", font="slant"), "cyan"))
-    console.print("Chicago Public Library Finder\n".center(60), style="bold blue")
+    welcome_text = pyfiglet.figlet_format("ChiLib", font="slant")
+    console.print(f"[cyan]{welcome_text}[/]")
+    console.print("Chicago Public Library Finder", style="bold blue", justify="center")
     
     try:
         with Progress() as progress:
@@ -247,13 +253,14 @@ def main() -> None:
         try:
             user_input = console.input("\n[bold yellow]📮 Enter ZIP code (or 'help'): [/bold yellow]").strip().lower()
             
-            # Command handling
+            # this is a simple command handling for the user help 
             if user_input in ('exit', 'quit'):
                 console.print("\n[bold magenta]✨ Thank you for using Chicago Library Finder![/bold magenta]\n")
                 break
                 
             if user_input == 'help':
                 console.print("\n[bold]COMMAND MENU:[/bold]")
+                console.print("\n[bold]COMMAND MENU[/bold]")
                 console.print("  [cyan]help[/cyan]    - Show this menu")
                 console.print("  [cyan]history[/cyan] - Recent searches (compact view)")
                 console.print("  [cyan]full[/cyan]    - Detailed search history")
@@ -271,12 +278,12 @@ def main() -> None:
                     display_history(history)
                 continue
 
-            # Input validation
+            # this is to check input and validate it 
             if not Config.ZIP_REGEX.match(user_input):
                 console.print(f"[red]❌ Invalid ZIP code format. Must be 5 digits (e.g. 60606)[/red]")
                 continue
 
-            # Library search execution
+            # here I am supposed to execute library search 
             with console.status(f"[bold green]🔍 Searching {user_input}...[/bold green]"):
                 matching = [lib for lib in libraries if lib['ZIP'] == user_input]
                 time.sleep(0.3)  # Simulated search delay
@@ -290,7 +297,7 @@ def main() -> None:
                     console.print(format_library(lib, idx))
                     history.append({'time': search_time, 'library': lib})
                 
-                # Maintain history limits
+                # this should be able to maintain history limits
                 history = history[-Config.HISTORY_LIMIT:]
 
         except KeyboardInterrupt:

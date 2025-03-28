@@ -98,10 +98,8 @@ Available Commands
 ---
 
 Example
-Copy📮 Enter ZIP code (or 'help'): 60601
-✅ Found 2 libraries:
-🏛️ Library #1: Harold Washington Library Center
-...
+
+![alt text](image.png)
 
 ---
 
