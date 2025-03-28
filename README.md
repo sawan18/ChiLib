@@ -50,6 +50,7 @@ On Windows, use 'venv\Scripts\activate'
 Install required dependencies:
 
 bash:-
+
 pip install -r requirements.txt
 
 pip install requests termcolor pyfiglet rich
