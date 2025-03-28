@@ -79,7 +79,7 @@ The application retrieves library information from the official City of Chicago 
 
     Run the application:
 
-    python library_finder.py
+    python ChiLib.py
 
 ---
 
