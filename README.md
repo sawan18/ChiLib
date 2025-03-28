@@ -1,8 +1,8 @@
 🏛️ ChiLib: Chicago Public Library Finder
 
-📝 Project Overview
-
 ---
+
+📝 Project Overview
 
 ChiLib is a powerful Command-Line Interface (CLI) tool designed to help users find Chicago Public Library branches quickly and efficiently. The application retrieves library information from the official City of Chicago open data repository and provides an intuitive search experience based on ZIP codes.
 
